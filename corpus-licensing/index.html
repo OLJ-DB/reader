@@ -1,0 +1,418 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Corpus Licensing and Public Contacts | OAJD</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #17231e;
+      --muted: #526159;
+      --paper: #ffffff;
+      --wash: #f4f7f5;
+      --line: #cbd5cf;
+      --green: #075f46;
+      --green-bg: #e3f4ed;
+      --blue: #155b78;
+      --blue-bg: #e6f2f7;
+      --amber: #704500;
+      --amber-bg: #fff0c7;
+      --red: #7b2635;
+      --red-bg: #f9e8ec;
+    }
+    * { box-sizing: border-box; }
+    html { background: var(--wash); letter-spacing: 0; }
+    body { margin: 0; color: var(--ink); background: var(--wash); font: 15px/1.5 "Segoe UI", Arial, sans-serif; }
+    a { color: #005a72; text-decoration-thickness: 1px; text-underline-offset: 2px; }
+    a:hover { color: #003e50; text-decoration-thickness: 2px; }
+    a:focus-visible, summary:focus-visible, .table-region:focus-visible { outline: 3px solid #c47b00; outline-offset: 3px; }
+    .skip-link { position: absolute; left: 1rem; top: -5rem; z-index: 10; padding: .65rem .85rem; color: #fff; background: #17231e; }
+    .skip-link:focus { top: 1rem; }
+    .page-header { padding: 2.1rem max(1.25rem, calc((100% - 1380px) / 2)); background: var(--paper); border-bottom: 1px solid var(--line); }
+    .eyebrow { margin: 0 0 .35rem; color: var(--green); font-size: .78rem; font-weight: 700; text-transform: uppercase; }
+    h1 { margin: 0; max-width: 900px; font-size: 2.35rem; line-height: 1.1; font-weight: 720; }
+    .lede { max-width: 930px; margin: .8rem 0 1.2rem; color: #35443c; font-size: 1.05rem; }
+    .summary { display: flex; flex-wrap: wrap; gap: .75rem 1.4rem; margin: 0; padding-top: 1rem; border-top: 1px solid var(--line); }
+    .summary div { display: flex; align-items: baseline; gap: .38rem; }
+    .summary dt { color: var(--muted); font-size: .78rem; font-weight: 700; text-transform: uppercase; }
+    .summary dd { margin: 0; font-size: 1.2rem; font-weight: 750; }
+    .policy-breakdown, .timestamps { margin: .75rem 0 0; color: var(--muted); font-size: .84rem; }
+    main, footer { width: min(1380px, calc(100% - 2.5rem)); margin-inline: auto; }
+    .scope { padding: 1.35rem 0 1rem; }
+    h2 { margin: 0 0 .35rem; font-size: 1.05rem; }
+    .scope p { max-width: 1080px; margin: 0; color: var(--muted); }
+    .table-region { overflow: auto; background: var(--paper); border: 1px solid var(--line); border-radius: 6px; box-shadow: 0 2px 8px rgba(24, 43, 34, .06); }
+    table { width: 100%; min-width: 1100px; border-collapse: separate; border-spacing: 0; font-size: .91rem; }
+    caption { padding: .8rem 1rem; color: var(--muted); text-align: left; font-size: .82rem; border-bottom: 1px solid var(--line); }
+    th, td { padding: .85rem 1rem; text-align: left; vertical-align: top; border-bottom: 1px solid #dde4e0; }
+    th { position: sticky; top: 0; z-index: 1; color: #2d3a34; background: #edf2ef; font-size: .77rem; text-transform: uppercase; }
+    tbody tr:nth-child(even) { background: #fafcfb; }
+    tbody tr:last-child td { border-bottom: 0; }
+    .journal { width: 18%; }
+    .evidence { width: 43%; }
+    .era { width: 19%; }
+    .contact { width: 20%; }
+    .journal-name { display: block; margin-bottom: .25rem; font-size: 1rem; }
+    code { padding: .12rem .28rem; color: #25342d; background: #e8eeeb; border-radius: 3px; font: .83rem Consolas, monospace; }
+    .platform, .secondary, .contact-note { display: block; margin-top: .32rem; color: var(--muted); font-size: .82rem; }
+    .tag { display: inline-block; margin-bottom: .45rem; padding: .15rem .4rem; border: 1px solid currentColor; border-radius: 3px; font-size: .72rem; font-weight: 750; }
+    .tag.cc { color: var(--green); background: var(--green-bg); }
+    .tag.terms { color: var(--blue); background: var(--blue-bg); }
+    .tag.restricted { color: var(--red); background: var(--red-bg); }
+    .tag.unknown { color: var(--amber); background: var(--amber-bg); }
+    .tag.contact-only { color: var(--blue); background: var(--blue-bg); }
+    .tag.no-result { color: #4b5650; background: #edf1ef; }
+    .license-name { display: block; margin-bottom: .25rem; line-height: 1.35; }
+    .policy-link { display: inline-block; margin: .18rem 0 .38rem; font-weight: 650; }
+    .policy-summary { margin: 0; color: #35443c; }
+    details { margin-top: .55rem; }
+    summary { width: fit-content; cursor: pointer; color: #005a72; font-size: .82rem; font-weight: 650; }
+    .source-list, .email-list { margin: .35rem 0 0; padding-left: 1.15rem; }
+    .source-list li, .email-list li { margin: .18rem 0; overflow-wrap: anywhere; }
+    .era p { margin: 0 0 .45rem; }
+    .caveat { color: var(--muted); font-size: .82rem; }
+    footer { padding: 1.15rem 0 2rem; color: var(--muted); font-size: .8rem; }
+    @media (max-width: 720px) {
+      .page-header { padding: 1.5rem 1.25rem; }
+      h1 { font-size: 1.85rem; }
+      main, footer { width: calc(100% - 1.5rem); }
+      .summary { gap: .5rem 1rem; }
+    }
+    @media print {
+      body, html { background: #fff; }
+      .skip-link { display: none; }
+      .page-header, main, footer { width: 100%; padding-left: 0; padding-right: 0; }
+      .table-region { overflow: visible; border: 0; box-shadow: none; }
+      table { min-width: 0; font-size: 8pt; }
+      th { position: static; }
+      a { color: #000; }
+    }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#report">Skip to licensing evidence</a>
+  <header class="page-header">
+    <p class="eyebrow">Open Access Journals Database</p>
+    <h1>Corpus licensing and public contacts</h1>
+    <p class="lede">A read-only register of every current corpus journal, with curated public policy and contact evidence where recorded. A missing curated result is not a finding that no license exists, and open access is not treated as a Creative Commons license unless the source names one.</p>
+    <dl class="summary" aria-label="Report summary">
+      <div><dt>Total journals</dt><dd>41</dd></div>
+      <div><dt>Policy results</dt><dd>25</dd></div>
+      <div><dt>Contact only</dt><dd>8</dd></div>
+      <div><dt>No curated result</dt><dd>8</dd></div>
+    </dl>
+    <p class="policy-breakdown"><strong>Policy-result breakdown:</strong> 6 Creative Commons; 5 other public terms; 8 restricted or permission-based; 6 access stated with reuse unconfirmed.</p>
+    <p class="timestamps"><strong>Evidence snapshot:</strong> <time datetime="2026-05-28T11:56:11-06:00">May 28, 2026, 11:56 UTC-06:00</time>. <strong>Generated:</strong> <time datetime="2026-07-14T20:19:06-06:00">July 14, 2026, 20:19 UTC-06:00</time>.</p>
+  </header>
+  <main id="report" tabindex="-1">
+    <section class="scope" aria-labelledby="scope-title">
+      <h2 id="scope-title">Scope and use</h2>
+      <p>Curated manual review of public journal, publisher, and repository policy and contact pages. All current <code>journal_registry</code> datasets are included. Contact-only rows have a curated public contact but no recorded policy result; no-result rows have neither. Neither label asserts that a license or policy does not exist. Dates describe corpus coverage, not automatic license coverage. Public emails appear only when recorded in the evidence file.</p>
+    </section>
+    <div class="table-region" role="region" aria-label="Corpus licensing evidence table" tabindex="0">
+      <table>
+        <caption>Complete current journal registry with curated public policy and contact evidence. Verify source terms before reuse or outreach.</caption>
+        <thead>
+          <tr>
+            <th class="journal" scope="col">Journal and dataset</th>
+            <th class="evidence" scope="col">Public policy evidence</th>
+            <th class="era" scope="col">Corpus scope and era</th>
+            <th class="contact" scope="col">Public contact</th>
+          </tr>
+        </thead>
+        <tbody>
+<tr>
+  <td class="journal"><strong class="journal-name">Alberta Law Review</strong><code>ALTA-L-REV</code><span class="platform">OJS</span></td>
+  <td class="evidence"><span class="tag no-result">No curated result</span><strong class="license-name">No curated public policy result in this evidence snapshot</strong><p class="policy-summary">No licensing conclusion is drawn. This does not mean that no license or rights policy exists.</p></td>
+  <td class="era"><p>2,503 visible article records dated 1955-2026.</p><p class="caveat">No licensing conclusion is drawn from the absence of a curated policy result.</p></td>
+  <td class="contact"><span class="contact-note">No curated public contact route is recorded in this evidence snapshot.</span></td>
+</tr>
+
+<tr>
+  <td class="journal"><strong class="journal-name">Appeal: Review of Current Law and Law Reform</strong><code>APPEAL</code><span class="platform">OJS</span></td>
+  <td class="evidence"><span class="tag restricted">Restricted / permission-based</span><strong class="license-name">Open-access journal; all rights reserved; reproduction/republication requires permission</strong><span class="policy-link"><a href="https://journals.uvic.ca/index.php/appeal/about/submissions" target="_blank" rel="noopener noreferrer">Appeal submissions and copyright notice</a></span><p class="policy-summary">The journal has an open-access policy, but the submissions page states that copyright is held by the Appeal Publishing Society and that permission is required to reproduce or republish material.</p><details><summary>Supporting sources (1)</summary><ul class="source-list"><li><a href="https://www.uvic.ca/law/jd/appeal/" target="_blank" rel="noopener noreferrer">Supporting source 1: uvic.ca</a></li></ul></details></td>
+  <td class="era"><p>221 visible article records dated 1995-2026.</p><p class="caveat">No archive-wide license coverage is inferred from this source.</p></td>
+  <td class="contact"><a href="https://www.uvic.ca/law/jd/appeal/#:~:text=appeal%40uvic.ca" target="_blank" rel="noopener noreferrer">UVic Appeal Law Journal contact</a><ul class="email-list"><li><a href="mailto:appeal@uvic.ca">appeal@uvic.ca</a></li></ul></td>
+</tr>
+
+<tr>
+  <td class="journal"><strong class="journal-name">Asper Review</strong><code>ASPER-REV</code><span class="platform">OJS</span></td>
+  <td class="evidence"><span class="tag cc">Creative Commons</span><strong class="license-name">CC BY-NC 4.0</strong><span class="policy-link"><a href="https://journals.library.ualberta.ca/asperreview/index.php/asperreview/about" target="_blank" rel="noopener noreferrer">Asper Review archive and licensing notice</a></span><p class="policy-summary">The journal-specific OJS page states that content is open access, authors retain copyright, and works are licensed under CC BY-NC 4.0. It also states that the journal ceased publication in 2021 and that the University of Alberta Library maintains the archive.</p></td>
+  <td class="era"><p>232 visible article records dated 2001-2021.</p><p class="caveat">The evidence includes an era qualification; review it before applying terms to an item.</p></td>
+  <td class="contact"><a href="https://journals.library.ualberta.ca/asperreview/index.php/asperreview/about/contact#:~:text=Principal%20Contact%20Bryan%20Schwartz" target="_blank" rel="noopener noreferrer">Asper Review OJS contact</a><span class="contact-note">No public email is recorded in this evidence snapshot.</span></td>
+</tr>
+
+<tr>
+  <td class="journal"><strong class="journal-name">CIJS Annual Review of Interdisciplinary Justice Research</strong><code>CIJS-ANN-REV</code><span class="platform">cijs</span></td>
+  <td class="evidence"><span class="tag no-result">No curated result</span><strong class="license-name">No curated public policy result in this evidence snapshot</strong><p class="policy-summary">No licensing conclusion is drawn. This does not mean that no license or rights policy exists.</p></td>
+  <td class="era"><p>155 visible article records dated 2010-2025.</p><p class="caveat">No licensing conclusion is drawn from the absence of a curated policy result.</p></td>
+  <td class="contact"><span class="contact-note">No curated public contact route is recorded in this evidence snapshot.</span></td>
+</tr>
+
+<tr>
+  <td class="journal"><strong class="journal-name">Canada-United States Law Journal</strong><code>CAN-US-LJ</code><span class="platform">digitalcommons</span></td>
+  <td class="evidence"><span class="tag unknown">Access stated; reuse unconfirmed</span><strong class="license-name">Free/open repository access; no CC reuse license found; older front matter routes republication through CCC</strong><span class="policy-link"><a href="https://scholarlycommons.law.case.edu/cuslj/" target="_blank" rel="noopener noreferrer">Canada-United States Law Journal repository page</a></span><p class="policy-summary">Current Case Western Scholarly Commons pages make PDFs freely available and describe the journal repository, but the checked repository home, about page, current article page, and issue pages do not expose a Creative Commons or public reuse license. Older front matter routes photocopy/republication requests through the Copyright Clearance Center.</p><details><summary>Supporting sources (4)</summary><ul class="source-list"><li><a href="https://scholarlycommons.law.case.edu/cuslj/about.html" target="_blank" rel="noopener noreferrer">Supporting source 1: scholarlycommons.law.case.edu</a></li><li><a href="https://scholarlycommons.law.case.edu/cuslj/vol43/iss1/7/" target="_blank" rel="noopener noreferrer">Supporting source 2: scholarlycommons.law.case.edu</a></li><li><a href="https://www.canlii.org/w/canlii/2011CanLIIDocs645.pdf" target="_blank" rel="noopener noreferrer">Supporting source 3: canlii.org</a></li><li><a href="https://canadauslawjournal.scholasticahq.com/" target="_blank" rel="noopener noreferrer">Supporting source 4: canadauslawjournal.scholasticahq.com</a></li></ul></details></td>
+  <td class="era"><p>508 visible article records dated 1991-2025.</p><p class="caveat">The evidence includes an era qualification; review it before applying terms to an item.</p></td>
+  <td class="contact"><a href="https://scholarlycommons.law.case.edu/cuslj/about.html#:~:text=cusli%40case.edu" target="_blank" rel="noopener noreferrer">CUSLJ about/contact</a><ul class="email-list"><li><a href="mailto:cusli@case.edu">cusli@case.edu</a></li><li><a href="mailto:cleguard@uwo.ca">cleguard@uwo.ca</a></li></ul></td>
+</tr>
+
+<tr>
+  <td class="journal"><strong class="journal-name">Canadian Bar Review</strong><code>CAN-BAR-REV</code><span class="platform">OJS</span></td>
+  <td class="evidence"><span class="tag restricted">Restricted / permission-based</span><strong class="license-name">Joint copyright; permission required for reproduction; fee stated except educational instruction</strong><span class="policy-link"><a href="https://cbr.cba.org/index.php/cbr/about/submissions" target="_blank" rel="noopener noreferrer">Canadian Bar Review submissions and copyright notice</a></span><p class="policy-summary">The submissions page says published copyright is reserved jointly by the Review and author, permission to reproduce must be sent to both, and a fee is charged except for sole instructional use.</p><details><summary>Supporting sources (2)</summary><ul class="source-list"><li><a href="https://cbr.cba.org/index.php/cbr/about" target="_blank" rel="noopener noreferrer">Supporting source 1: cbr.cba.org</a></li><li><a href="https://cbr.cba.org/index.php/cbr/copyright" target="_blank" rel="noopener noreferrer">Supporting source 2: cbr.cba.org</a></li></ul></details></td>
+  <td class="era"><p>4,582 visible article records dated 1923-2026.</p><p class="caveat">No archive-wide license coverage is inferred from this source.</p></td>
+  <td class="contact"><a href="https://cbr.cba.org/index.php/cbr/about/editorialTeam#:~:text=review%40cba.org" target="_blank" rel="noopener noreferrer">Canadian Bar Review editorial contact</a><ul class="email-list"><li><a href="mailto:review@cba.org">review@cba.org</a></li></ul></td>
+</tr>
+
+<tr>
+  <td class="journal"><strong class="journal-name">Canadian Competition Law Review</strong><code>CAN-COMP-L-REV</code><span class="platform">OJS</span></td>
+  <td class="evidence"><span class="tag restricted">Restricted / permission-based</span><strong class="license-name">Grant of license to CBA; all rights reserved; reproduction requests by email</strong><span class="policy-link"><a href="https://cclr.cba.org/index.php/cclr/about/submissions" target="_blank" rel="noopener noreferrer">Canadian Competition Law Review submissions and copyright notice</a></span><p class="policy-summary">The submissions page includes a Grant of License form giving the CBA broad non-exclusive rights. The journal pages also state all rights reserved and direct reproduction requests to the journal email.</p><details><summary>Supporting sources (2)</summary><ul class="source-list"><li><a href="https://cclr.cba.org/index.php/cclr/about" target="_blank" rel="noopener noreferrer">Supporting source 1: cclr.cba.org</a></li><li><a href="https://cclr.cba.org/index.php/cclr/issue/current" target="_blank" rel="noopener noreferrer">Supporting source 2: cclr.cba.org</a></li></ul></details></td>
+  <td class="era"><p>52 visible article records dated 2012-2025.</p><p class="caveat">No archive-wide license coverage is inferred from this source.</p></td>
+  <td class="contact"><a href="https://cclr.cba.org/index.php/cclr/about/submissions#:~:text=cancomplrev%40cba.org" target="_blank" rel="noopener noreferrer">Canadian Competition Law Review submissions/contact</a><ul class="email-list"><li><a href="mailto:cancomplrev@cba.org">cancomplrev@cba.org</a></li></ul></td>
+</tr>
+
+<tr>
+  <td class="journal"><strong class="journal-name">Canadian Journal of Commercial Arbitration</strong><code>CJCA</code><span class="platform">queens</span></td>
+  <td class="evidence"><span class="tag restricted">Restricted / permission-based</span><strong class="license-name">PDFs available; no reuse license found; site footer says All Rights Reserved</strong><span class="policy-link"><a href="https://cjca.queenslaw.ca/submission" target="_blank" rel="noopener noreferrer">CJCA submissions page</a></span><p class="policy-summary">CJCA publishes issue PDFs on its website, but I did not find an article reuse license or Creative Commons statement on the checked issue, about, masthead, contact, and submission pages. The submissions page gives journal email contacts and the site footer states All Rights Reserved.</p><details><summary>Supporting sources (2)</summary><ul class="source-list"><li><a href="https://cjca.queenslaw.ca/issues" target="_blank" rel="noopener noreferrer">Supporting source 1: cjca.queenslaw.ca</a></li><li><a href="https://cjca.queenslaw.ca/about" target="_blank" rel="noopener noreferrer">Supporting source 2: cjca.queenslaw.ca</a></li></ul></details></td>
+  <td class="era"><p>70 visible article records dated 2020-2024.</p><p class="caveat">No archive-wide license coverage is inferred from this source.</p></td>
+  <td class="contact"><a href="https://cjca.queenslaw.ca/submission#:~:text=cjcasubmissions%40queensu.ca" target="_blank" rel="noopener noreferrer">CJCA submissions/contact</a><ul class="email-list"><li><a href="mailto:cjcasubmissions@queensu.ca">cjcasubmissions@queensu.ca</a></li><li><a href="mailto:cjca@queensu.ca">cjca@queensu.ca</a></li></ul></td>
+</tr>
+
+<tr>
+  <td class="journal"><strong class="journal-name">Canadian Journal of Comparative and Contemporary Law</strong><code>CAN-J-COMP-CONTEMP-L</code><span class="platform">cjccl</span></td>
+  <td class="evidence"><span class="tag restricted">Restricted / permission-based</span><strong class="license-name">Open-access publication; commercial reuse and republication require editor permission</strong><span class="policy-link"><a href="https://www.cjccl.ca/wp-content/uploads/2022/CJCCL-V8-full.pdf" target="_blank" rel="noopener noreferrer">CJCCL Volume 8 full issue front matter</a></span><p class="policy-summary">Full-issue front matter contains a Copyright and Open-Access Policy. It states the journal is open-access, governed by a publishing and licensing agreement with contributors, and that commercial use or republication requires permission from the Editors-in-Chief.</p></td>
+  <td class="era"><p>92 visible article records dated 2015-2022.</p><p class="caveat">No archive-wide license coverage is inferred from this source.</p></td>
+  <td class="contact"><a href="https://www.cjccl.ca/wp-content/uploads/2022/CJCCL-V8-full.pdf" target="_blank" rel="noopener noreferrer">Contact information in CJCCL full issue</a><ul class="email-list"><li><a href="mailto:editor@cjccl.ca">editor@cjccl.ca</a></li></ul></td>
+</tr>
+
+<tr>
+  <td class="journal"><strong class="journal-name">Canadian Journal of Family Law</strong><code>CAN-J-FAM-L</code><span class="platform">digitalcommons</span></td>
+  <td class="evidence"><span class="tag cc">Creative Commons</span><strong class="license-name">CC BY-NC-ND for Volume 33 onward; older volumes have more restrictive front-matter terms</strong><span class="policy-link"><a href="https://allard.ubc.ca/about-us/news-and-announcements/2020/canadian-journal-family-law-now-available-online" target="_blank" rel="noopener noreferrer">Canadian Journal of Family Law is now available online</a></span><p class="policy-summary">Allard Law states that beginning with Volume 33 (2020), CJFL content is immediately open access and available under a Creative Commons license requiring attribution, no derivatives, and no commercial use. Earlier front matter shows older permission/copyright-reserved terms, so the report treats this as a tranche-specific license.</p><details><summary>Supporting sources (3)</summary><ul class="source-list"><li><a href="https://commons.allard.ubc.ca/can-j-fam-l/" target="_blank" rel="noopener noreferrer">Supporting source 1: commons.allard.ubc.ca</a></li><li><a href="https://www.canlii.org/w/canlii/2022CanLIIDocs3248.pdf" target="_blank" rel="noopener noreferrer">Supporting source 2: canlii.org</a></li><li><a href="https://www.canlii.org/w/canlii/2020CanLIIDocs3644.pdf" target="_blank" rel="noopener noreferrer">Supporting source 3: canlii.org</a></li></ul></details></td>
+  <td class="era"><p>116 visible article records dated 2010-2025.</p><p class="caveat">Era-limited terms: use only for the volumes or years named in the evidence.</p></td>
+  <td class="contact"><a href="https://cdnjfl.allard.ubc.ca/contact-us/#:~:text=cdnjfl%40gmail.com" target="_blank" rel="noopener noreferrer">Canadian Journal of Family Law contact</a><ul class="email-list"><li><a href="mailto:cdnjfl@gmail.com">cdnjfl@gmail.com</a></li></ul></td>
+</tr>
+
+<tr>
+  <td class="journal"><strong class="journal-name">Canadian Journal of Human Rights</strong><code>CAN-J-HUM-RTS</code><span class="platform">cjhr</span></td>
+  <td class="evidence"><span class="tag cc">Creative Commons</span><strong class="license-name">CC BY-NC-ND; current front matter indicates 4.0 Canada, older front matter indicates 2.5 Canada</strong><span class="policy-link"><a href="https://cjhr.ca/download/3191/?tmstv=1754408308&amp;v=3192" target="_blank" rel="noopener noreferrer">Canadian Journal of Human Rights front matter</a></span><p class="policy-summary">The CJHR site states all articles are available for download under its Open Access Policy. Issue front matter states that copyright is held by CJHR and that the issue/articles are licensed under Creative Commons Attribution-NonCommercial-NoDerivs Canada licenses; current issue evidence shows 4.0 Canada, older issue evidence shows 2.5 Canada.</p><details><summary>Supporting sources (3)</summary><ul class="source-list"><li><a href="https://cjhr.ca/" target="_blank" rel="noopener noreferrer">Supporting source 1: cjhr.ca</a></li><li><a href="https://cjhr.ca/subscriptions/" target="_blank" rel="noopener noreferrer">Supporting source 2: cjhr.ca</a></li><li><a href="https://cjhr.ca/wp-content/uploads/2021/05/9.1-Cover-Page-and-Table-of-Contents-1.pdf" target="_blank" rel="noopener noreferrer">Supporting source 3: cjhr.ca</a></li></ul></details></td>
+  <td class="era"><p>88 visible article records dated 2012-2026.</p><p class="caveat">The evidence includes an era qualification; review it before applying terms to an item.</p></td>
+  <td class="contact"><a href="https://cjhr.ca/contact/#:~:text=cjhr%40umanitoba.ca" target="_blank" rel="noopener noreferrer">Canadian Journal of Human Rights contact</a><ul class="email-list"><li><a href="mailto:cjhr@umanitoba.ca">cjhr@umanitoba.ca</a></li></ul></td>
+</tr>
+
+<tr>
+  <td class="journal"><strong class="journal-name">Canadian Journal of Law and Jurisprudence</strong><code>CAN-JL-JUR</code><span class="platform">Cambridge</span></td>
+  <td class="evidence"><span class="tag contact-only">Contact only</span><strong class="license-name">No public licensing result recorded</strong><p class="policy-summary">The curated evidence records a public contact route but no public licensing or rights-policy result. No conclusion is drawn about whether a license or policy exists.</p></td>
+  <td class="era"><p>93 visible article records dated 2016-2026.</p><p class="caveat">No licensing conclusion is drawn from the absence of a curated policy result.</p></td>
+  <td class="contact"><a href="https://law.uwo.ca/research/the_canadian_journal_of_law_and_jurisprudence/index.html#:~:text=cjlj%40uwo.ca" target="_blank" rel="noopener noreferrer">Western Law CJLJ page</a><ul class="email-list"><li><a href="mailto:cjlj@uwo.ca">cjlj@uwo.ca</a></li></ul></td>
+</tr>
+
+<tr>
+  <td class="journal"><strong class="journal-name">Canadian Journal of Law and Society</strong><code>CJLS</code><span class="platform">Cambridge</span></td>
+  <td class="evidence"><span class="tag contact-only">Contact only</span><strong class="license-name">No public licensing result recorded</strong><p class="policy-summary">The curated evidence records a public contact route but no public licensing or rights-policy result. No conclusion is drawn about whether a license or policy exists.</p></td>
+  <td class="era"><p>123 visible article records dated 2014-2026.</p><p class="caveat">No licensing conclusion is drawn from the absence of a curated policy result.</p></td>
+  <td class="contact"><a href="https://www.acds-clsa.ca/journal.html#:~:text=cjls_rcds%40carleton.ca" target="_blank" rel="noopener noreferrer">CLSA CJLS journal page</a><ul class="email-list"><li><a href="mailto:cjls_rcds@carleton.ca">cjls_rcds@carleton.ca</a></li><li><a href="mailto:info@acds-clsa.ca">info@acds-clsa.ca</a></li></ul></td>
+</tr>
+
+<tr>
+  <td class="journal"><strong class="journal-name">Constitutional Forum Constitutionnel</strong><code>CONST-FORUM</code><span class="platform">OJS</span></td>
+  <td class="evidence"><span class="tag cc">Creative Commons</span><strong class="license-name">CC BY-NC-ND 4.0</strong><span class="policy-link"><a href="https://journals.library.ualberta.ca/constitutional_forum/index.php/constitutional_forum/about/submissions" target="_blank" rel="noopener noreferrer">Constitutional Forum submissions and copyright notice</a></span><p class="policy-summary">The journal-specific OJS submissions page states that authors grant first publication and agree to license the work under Attribution-NonCommercial-NoDerivs (CC BY-NC-ND). Representative article pages also show Creative Commons BY-NC-ND 4.0 International.</p><details><summary>Supporting sources (2)</summary><ul class="source-list"><li><a href="https://journals.library.ualberta.ca/constitutional_forum/index.php/constitutional_forum/article/view/29450" target="_blank" rel="noopener noreferrer">Supporting source 1: journals.library.ualberta.ca</a></li><li><a href="https://journals.library.ualberta.ca/constitutional_forum/index.php/constitutional_forum/about" target="_blank" rel="noopener noreferrer">Supporting source 2: journals.library.ualberta.ca</a></li></ul></details></td>
+  <td class="era"><p>558 visible article records dated 1989-2026.</p><p class="caveat">No archive-wide license coverage is inferred from this source.</p></td>
+  <td class="contact"><a href="https://journals.library.ualberta.ca/constitutional_forum/index.php/constitutional_forum/about/contact#:~:text=Richard%20Mailey" target="_blank" rel="noopener noreferrer">Constitutional Forum OJS contact</a><ul class="email-list"><li><a href="mailto:mailey@ualberta.ca">mailey@ualberta.ca</a></li></ul></td>
+</tr>
+
+<tr>
+  <td class="journal"><strong class="journal-name">Critical Analysis of Law</strong><code>CRITICAL-ANALYSIS-L</code><span class="platform">OJS</span></td>
+  <td class="evidence"><span class="tag contact-only">Contact only</span><strong class="license-name">No public licensing result recorded</strong><p class="policy-summary">The curated evidence records a public contact route but no public licensing or rights-policy result. No conclusion is drawn about whether a license or policy exists.</p></td>
+  <td class="era"><p>183 visible article records dated 2014-2023.</p><p class="caveat">No licensing conclusion is drawn from the absence of a curated policy result.</p></td>
+  <td class="contact"><a href="https://cal.library.utoronto.ca/index.php/cal/about/editorialTeam#:~:text=Markus%20Dubber" target="_blank" rel="noopener noreferrer">CAL editorial team and U of T faculty contacts</a><ul class="email-list"><li><a href="mailto:markus.dubber@utoronto.ca">markus.dubber@utoronto.ca</a></li><li><a href="mailto:simon.stern@utoronto.ca">simon.stern@utoronto.ca</a></li></ul></td>
+</tr>
+
+<tr>
+  <td class="journal"><strong class="journal-name">Dalhousie Journal of Legal Studies</strong><code>DALHOUSIE-J-LEG-STUD</code><span class="platform">Digital Commons</span></td>
+  <td class="evidence"><span class="tag contact-only">Contact only</span><strong class="license-name">No public licensing result recorded</strong><p class="policy-summary">The curated evidence records a public contact route but no public licensing or rights-policy result. No conclusion is drawn about whether a license or policy exists.</p></td>
+  <td class="era"><p>327 visible article records dated 1992-2026.</p><p class="caveat">No licensing conclusion is drawn from the absence of a curated policy result.</p></td>
+  <td class="contact"><a href="https://digitalcommons.schulichlaw.dal.ca/djls/aimsandscope.html#:~:text=djls%40dal.ca" target="_blank" rel="noopener noreferrer">DJLS submitting page</a><ul class="email-list"><li><a href="mailto:djls@dal.ca">djls@dal.ca</a></li></ul></td>
+</tr>
+
+<tr>
+  <td class="journal"><strong class="journal-name">Dalhousie Law Journal</strong><code>DALHOUSIE-LJ</code><span class="platform">Digital Commons</span></td>
+  <td class="evidence"><span class="tag contact-only">Contact only</span><strong class="license-name">No public licensing result recorded</strong><p class="policy-summary">The curated evidence records a public contact route but no public licensing or rights-policy result. No conclusion is drawn about whether a license or policy exists.</p></td>
+  <td class="era"><p>1,157 visible article records dated 1956-2026.</p><p class="caveat">No licensing conclusion is drawn from the absence of a curated policy result.</p></td>
+  <td class="contact"><a href="https://digitalcommons.schulichlaw.dal.ca/dlj/policies.html#:~:text=editor.dlj%40dal.ca" target="_blank" rel="noopener noreferrer">DLJ information for contributors</a><ul class="email-list"><li><a href="mailto:editor.dlj@dal.ca">editor.dlj@dal.ca</a></li></ul></td>
+</tr>
+
+<tr>
+  <td class="journal"><strong class="journal-name">Global Justice Journal</strong><code>GLOBAL-JUSTICE-J</code><span class="platform">gjj</span></td>
+  <td class="evidence"><span class="tag restricted">Restricted / permission-based</span><strong class="license-name">No article reuse license found; site footer says All Rights Reserved</strong><span class="policy-link"><a href="https://globaljustice.queenslaw.ca/about" target="_blank" rel="noopener noreferrer">Global Justice Journal About the Journal</a></span><p class="policy-summary">The about page confirms Queen&#x27;s Law publishes the PKI Global Justice Journal and links the article list. I did not find an article reuse license or Creative Commons statement on the checked about/articles/contributions pages; the site footer states All Rights Reserved.</p></td>
+  <td class="era"><p>Registry entry; no visible article records in the current corpus.</p><p class="caveat">No archive-wide license coverage is inferred from this source.</p></td>
+  <td class="contact"><a href="https://globaljustice.queenslaw.ca/contributions#:~:text=globaljustice%40queensu.ca" target="_blank" rel="noopener noreferrer">Call for Contributions</a><ul class="email-list"><li><a href="mailto:globaljustice@queensu.ca">globaljustice@queensu.ca</a></li></ul></td>
+</tr>
+
+<tr>
+  <td class="journal"><strong class="journal-name">Indigenous Law Journal</strong><code>INDIGENOUS-LJ</code><span class="platform">ilj</span></td>
+  <td class="evidence"><span class="tag unknown">Access stated; reuse unconfirmed</span><strong class="license-name">Immediate open-access statement; no reuse license found</strong><span class="policy-link"><a href="https://jps.library.utoronto.ca/index.php/ilj/about" target="_blank" rel="noopener noreferrer">Indigenous Law Journal About the Journal</a></span><p class="policy-summary">The OJS about page contains an Open Access Policy stating immediate open access. The checked about, submissions, contact, and representative article pages did not expose a Creative Commons or other reuse license block.</p><details><summary>Supporting sources (2)</summary><ul class="source-list"><li><a href="https://jps.library.utoronto.ca/index.php/ilj/about/submissions" target="_blank" rel="noopener noreferrer">Supporting source 1: jps.library.utoronto.ca</a></li><li><a href="https://jps.library.utoronto.ca/index.php/ilj/article/view/27706" target="_blank" rel="noopener noreferrer">Supporting source 2: jps.library.utoronto.ca</a></li></ul></details></td>
+  <td class="era"><p>80 visible article records dated 2002-2016.</p><p class="caveat">No archive-wide license coverage is inferred from this source.</p></td>
+  <td class="contact"><a href="https://jackmanlaw.utoronto.ca/indigenous-law-journal-ilj#:~:text=indiglaw.journal%40utoronto.ca" target="_blank" rel="noopener noreferrer">U of T Indigenous Law Journal page</a><ul class="email-list"><li><a href="mailto:indiglaw.journal@utoronto.ca">indiglaw.journal@utoronto.ca</a></li><li><a href="mailto:submissions.ilj@utoronto.ca">submissions.ilj@utoronto.ca</a></li></ul></td>
+</tr>
+
+<tr>
+  <td class="journal"><strong class="journal-name">Inter Gentes</strong><code>INTER-GENTES</code><span class="platform">intergentes</span></td>
+  <td class="evidence"><span class="tag terms">Other public terms</span><strong class="license-name">Author retains copyright; journal takes first-publication and non-exclusive reproduction/distribution licenses</strong><span class="policy-link"><a href="https://intergentes.com/submissions/" target="_blank" rel="noopener noreferrer">Inter Gentes submissions</a></span><p class="policy-summary">The submissions page says accepted authors sign an agreement covering exclusivity, copyright, and AI policies; copyright remains with the author, while the journal receives first-publication and non-exclusive reproduction/distribution rights. No public Creative Commons license was found.</p></td>
+  <td class="era"><p>32 visible article records dated 2016-2024.</p><p class="caveat">No archive-wide license coverage is inferred from this source.</p></td>
+  <td class="contact"><span class="contact-note">No curated public contact route is recorded in this evidence snapshot.</span></td>
+</tr>
+
+<tr>
+  <td class="journal"><strong class="journal-name">Journal of Law and Social Policy</strong><code>JL-SOC-POLY</code><span class="platform">Digital Commons</span></td>
+  <td class="evidence"><span class="tag terms">Other public terms</span><strong class="license-name">Author retains copyright under current publication agreement; journal receives broad non-exclusive publication/distribution rights</strong><span class="policy-link"><a href="https://digitalcommons.osgoode.yorku.ca/jlsp/Publication-Agreement-and-Copyright-LicenseJLSP-MARCH2018.pdf" target="_blank" rel="noopener noreferrer">JLSP publication agreement and copyright license</a></span><p class="policy-summary">The current publication agreement grants the Journal worldwide non-exclusive rights to publish, reproduce, distribute, and deposit the work in open-access repositories; it also states that authors retain copyright. The older Digital Commons policies page has broader repository-rights language, so the PDF agreement is treated as the stronger journal-specific evidence.</p><details><summary>Supporting sources (2)</summary><ul class="source-list"><li><a href="https://digitalcommons.osgoode.yorku.ca/jlsp/policies.html" target="_blank" rel="noopener noreferrer">Supporting source 1: digitalcommons.osgoode.yorku.ca</a></li><li><a href="https://digitalcommons.osgoode.yorku.ca/jlsp/news.html" target="_blank" rel="noopener noreferrer">Supporting source 2: digitalcommons.osgoode.yorku.ca</a></li></ul></details></td>
+  <td class="era"><p>316 visible article records dated 1986-2025.</p><p class="caveat">The evidence includes an era qualification; review it before applying terms to an item.</p></td>
+  <td class="contact"><a href="https://digitalcommons.osgoode.yorku.ca/jlsp/news.html#:~:text=JLSP%40osgoode.yorku.ca" target="_blank" rel="noopener noreferrer">JLSP call for papers contact</a><ul class="email-list"><li><a href="mailto:JLSP@osgoode.yorku.ca">JLSP@osgoode.yorku.ca</a></li><li><a href="mailto:madeleineharvey2024@osgoode.yorku.ca">madeleineharvey2024@osgoode.yorku.ca</a></li><li><a href="mailto:petergatti2024@osgoode.yorku.ca">petergatti2024@osgoode.yorku.ca</a></li><li><a href="mailto:mboittin@osgoode.yorku.ca">mboittin@osgoode.yorku.ca</a></li><li><a href="mailto:bberger@osgoode.yorku.ca">bberger@osgoode.yorku.ca</a></li></ul></td>
+</tr>
+
+<tr>
+  <td class="journal"><strong class="journal-name">Lakehead Law Journal</strong><code>LAKEHEAD-LJ</code><span class="platform">OJS</span></td>
+  <td class="evidence"><span class="tag terms">Other public terms</span><strong class="license-name">Free use with attribution for educational and non-commercial purposes; no CC label found</strong><span class="policy-link"><a href="https://llj.lakeheadu.ca/about/submissions" target="_blank" rel="noopener noreferrer">Lakehead Law Journal submissions and copyright notice</a></span><p class="policy-summary">The submissions page states that authors retain copyright, grant LLJ first-publication rights, and that articles in this open-access journal are free to use with attribution for educational and non-commercial purposes. No Creative Commons label was found.</p></td>
+  <td class="era"><p>44 visible article records dated 2015-2025.</p><p class="caveat">No archive-wide license coverage is inferred from this source.</p></td>
+  <td class="contact"><span class="contact-note">No curated public contact route is recorded in this evidence snapshot.</span></td>
+</tr>
+
+<tr>
+  <td class="journal"><strong class="journal-name">Manitoba Law Journal</strong><code>MAN-LJ</code><span class="platform">OJS</span></td>
+  <td class="evidence"><span class="tag cc">Creative Commons</span><strong class="license-name">Open access; article-level CC BY-NC-ND 4.0 confirmed for sampled 2012, 2014, 2025 articles; sampled 2011 article lacks license block</strong><span class="policy-link"><a href="https://journals.library.ualberta.ca/themanitobalawjournal/index.php/mlj/article/view/1380" target="_blank" rel="noopener noreferrer">Manitoba Law Journal article-level license tranche check</a></span><p class="policy-summary">The MLJ submissions page states the journal is open access. Article-level checks found CC BY-NC-ND 4.0 license statements on sampled 2012, 2014, and 2025 articles, while a sampled 2011 article page did not show a license block. Treat as confirmed article-level Creative Commons coverage for at least 2012 onward, not necessarily the full archive.</p><details><summary>Supporting sources (4)</summary><ul class="source-list"><li><a href="https://journals.library.ualberta.ca/themanitobalawjournal/index.php/mlj/about/submissions" target="_blank" rel="noopener noreferrer">Supporting source 1: journals.library.ualberta.ca</a></li><li><a href="https://journals.library.ualberta.ca/themanitobalawjournal/index.php/mlj/article/view/812" target="_blank" rel="noopener noreferrer">Supporting source 2: journals.library.ualberta.ca</a></li><li><a href="https://journals.library.ualberta.ca/themanitobalawjournal/index.php/mlj/article/view/900" target="_blank" rel="noopener noreferrer">Supporting source 3: journals.library.ualberta.ca</a></li><li><a href="https://journals.library.ualberta.ca/themanitobalawjournal/index.php/mlj/article/view/774" target="_blank" rel="noopener noreferrer">Supporting source 4: journals.library.ualberta.ca</a></li></ul></details></td>
+  <td class="era"><p>685 visible article records dated 2003-2025.</p><p class="caveat">Era-limited terms: use only for the volumes or years named in the evidence.</p></td>
+  <td class="contact"><a href="https://journals.library.ualberta.ca/themanitobalawjournal/index.php/mlj/about/contact#:~:text=Robson%20Hall" target="_blank" rel="noopener noreferrer">Manitoba Law Journal OJS contact</a><span class="contact-note">No public email is recorded in this evidence snapshot.</span></td>
+</tr>
+
+<tr>
+  <td class="journal"><strong class="journal-name">McGill Journal of Dispute Resolution</strong><code>MCGILL-J-DISP-RES</code><span class="platform">mjdr</span></td>
+  <td class="evidence"><span class="tag unknown">Access stated; reuse unconfirmed</span><strong class="license-name">Free access statement; no reuse license found</strong><span class="policy-link"><a href="https://mjdr-rrdm.ca/about-us-2/" target="_blank" rel="noopener noreferrer">MJDR About Us</a></span><p class="policy-summary">The about page says MJDR provides free, high-quality peer-reviewed scholarship. The checked about, issues, volume pages, submissions, and contact pages did not reveal a Creative Commons or other public reuse/copyright license.</p><details><summary>Supporting sources (2)</summary><ul class="source-list"><li><a href="https://mjdr-rrdm.ca/submissions/" target="_blank" rel="noopener noreferrer">Supporting source 1: mjdr-rrdm.ca</a></li><li><a href="https://mjdr-rrdm.ca/issues/volume-9/" target="_blank" rel="noopener noreferrer">Supporting source 2: mjdr-rrdm.ca</a></li></ul></details></td>
+  <td class="era"><p>70 visible article records dated 2014-2026.</p><p class="caveat">The evidence includes an era qualification; review it before applying terms to an item.</p></td>
+  <td class="contact"><a href="https://mjdr-rrdm.ca/submissions/#:~:text=coordinatingeditor.mjdr%40mcgill.ca" target="_blank" rel="noopener noreferrer">MJDR Submissions</a><ul class="email-list"><li><a href="mailto:coordinatingeditor.mjdr@mcgill.ca">coordinatingeditor.mjdr@mcgill.ca</a></li></ul></td>
+</tr>
+
+<tr>
+  <td class="journal"><strong class="journal-name">McGill Journal of Law and Health</strong><code>MCGILL-LJ-HEALTH</code><span class="platform">mjlh</span></td>
+  <td class="evidence"><span class="tag unknown">Access stated; reuse unconfirmed</span><strong class="license-name">Open-access statement; no reuse license found</strong><span class="policy-link"><a href="https://mjlh.mcgill.ca/about-2/" target="_blank" rel="noopener noreferrer">MJLH About</a></span><p class="policy-summary">The about page says MJLH makes all publications freely available online under open-access principles. The checked about, submissions, contact, and publication pages did not expose a Creative Commons or other public reuse license.</p><details><summary>Supporting sources (2)</summary><ul class="source-list"><li><a href="https://mjlh.mcgill.ca/submissions/" target="_blank" rel="noopener noreferrer">Supporting source 1: mjlh.mcgill.ca</a></li><li><a href="https://mjlh.mcgill.ca/publications/" target="_blank" rel="noopener noreferrer">Supporting source 2: mjlh.mcgill.ca</a></li></ul></details></td>
+  <td class="era"><p>130 visible article records dated 2007-2026.</p><p class="caveat">No archive-wide license coverage is inferred from this source.</p></td>
+  <td class="contact"><span class="contact-note">No curated public contact route is recorded in this evidence snapshot.</span></td>
+</tr>
+
+<tr>
+  <td class="journal"><strong class="journal-name">McGill Journal of Sustainable Development Law</strong><code>MCGILL-J-SUSTAINABLE-DEV-L</code><span class="platform">mjsdl</span></td>
+  <td class="evidence"><span class="tag cc">Creative Commons</span><strong class="license-name">CC BY-ND for Volume 21 and subsequent volumes</strong><span class="policy-link"><a href="https://www.mjsdl.com/policies" target="_blank" rel="noopener noreferrer">McGill Journal of Sustainable Development Law Policies</a></span><p class="policy-summary">The policy page states that copyright remains with authors and all articles in Volume 21 and subsequent volumes are published under an irrevocable Creative Commons CC BY-ND 4.0 license.</p></td>
+  <td class="era"><p>194 visible article records dated 2005-2026.</p><p class="caveat">The evidence includes an era qualification; review it before applying terms to an item.</p></td>
+  <td class="contact"><span class="contact-note">No curated public contact route is recorded in this evidence snapshot.</span></td>
+</tr>
+
+<tr>
+  <td class="journal"><strong class="journal-name">McGill Law Journal</strong><code>MCGILL-LJ</code><span class="platform">OJS</span></td>
+  <td class="evidence"><span class="tag no-result">No curated result</span><strong class="license-name">No curated public policy result in this evidence snapshot</strong><p class="policy-summary">No licensing conclusion is drawn. This does not mean that no license or rights policy exists.</p></td>
+  <td class="era"><p>65 visible article records dated 2023-2026.</p><p class="caveat">No licensing conclusion is drawn from the absence of a curated policy result.</p></td>
+  <td class="contact"><span class="contact-note">No curated public contact route is recorded in this evidence snapshot.</span></td>
+</tr>
+
+<tr>
+  <td class="journal"><strong class="journal-name">McGill Law Journal (back catalogue)</strong><code>MCGILL-LJ-BACKCAT</code><span class="platform">mcgill_backcat</span></td>
+  <td class="evidence"><span class="tag no-result">No curated result</span><strong class="license-name">No curated public policy result in this evidence snapshot</strong><p class="policy-summary">No licensing conclusion is drawn. This does not mean that no license or rights policy exists.</p></td>
+  <td class="era"><p>1,583 visible article records dated 1952-2008.</p><p class="caveat">No licensing conclusion is drawn from the absence of a curated policy result.</p></td>
+  <td class="contact"><span class="contact-note">No curated public contact route is recorded in this evidence snapshot.</span></td>
+</tr>
+
+<tr>
+  <td class="journal"><strong class="journal-name">McGill Law Journal (Érudit back issues)</strong><code>MCGILL-LJ-ERUDIT</code><span class="platform">erudit</span></td>
+  <td class="evidence"><span class="tag terms">Other public terms</span><strong class="license-name">Author retains copyright; MLJ takes exclusive first-publication plus non-exclusive reproduction/distribution license</strong><span class="policy-link"><a href="https://www.erudit.org/en/journals/mlj/" target="_blank" rel="noopener noreferrer">McGill Law Journal on Erudit</a></span><p class="policy-summary">The Erudit journal presentation page includes a Copyright &amp; Preprint Policy: authors retain copyright, but must grant the Journal an exclusive license for first publication and a non-exclusive license to reproduce/distribute extracts. It also restricts posting of the published article for eight months.</p><details><summary>Supporting sources (1)</summary><ul class="source-list"><li><a href="https://apropos.erudit.org/en/users/policy-on-use/" target="_blank" rel="noopener noreferrer">Supporting source 1: apropos.erudit.org</a></li></ul></details></td>
+  <td class="era"><p>471 visible article records dated 2009-2025.</p><p class="caveat">No archive-wide license coverage is inferred from this source.</p></td>
+  <td class="contact"><span class="contact-note">No curated public contact route is recorded in this evidence snapshot.</span></td>
+</tr>
+
+<tr>
+  <td class="journal"><strong class="journal-name">Osgoode Hall Law Journal</strong><code>OSGOODE-HALL-LJ</code><span class="platform">Digital Commons</span></td>
+  <td class="evidence"><span class="tag contact-only">Contact only</span><strong class="license-name">No public licensing result recorded</strong><p class="policy-summary">The curated evidence records a public contact route but no public licensing or rights-policy result. No conclusion is drawn about whether a license or policy exists.</p></td>
+  <td class="era"><p>2,124 visible article records dated 1958-2026.</p><p class="caveat">No licensing conclusion is drawn from the absence of a curated policy result.</p></td>
+  <td class="contact"><a href="https://digitalcommons.osgoode.yorku.ca/ohlj/policies.html#:~:text=editorinchief%40osgoode.yorku.ca" target="_blank" rel="noopener noreferrer">OHLJ submission and review process</a><ul class="email-list"><li><a href="mailto:editorinchief@osgoode.yorku.ca">editorinchief@osgoode.yorku.ca</a></li><li><a href="mailto:kgberger@osgoode.yorku.ca">kgberger@osgoode.yorku.ca</a></li><li><a href="mailto:managingeditor@osgoode.yorku.ca">managingeditor@osgoode.yorku.ca</a></li></ul></td>
+</tr>
+
+<tr>
+  <td class="journal"><strong class="journal-name">Ottawa Law Review</strong><code>OTTAWA-L-REV</code><span class="platform">olr</span></td>
+  <td class="evidence"><span class="tag terms">Other public terms</span><strong class="license-name">Entirely open access; broad read/download/copy/distribute statement; no CC license found</strong><span class="policy-link"><a href="https://rdo-olr.org/" target="_blank" rel="noopener noreferrer">Ottawa Law Review homepage</a></span><p class="policy-summary">The homepage states that issues from 1966 onward are freely available and can be read, downloaded, copied, distributed, printed, or searched without financial, legal, or technical barriers. I did not find a Creative Commons license on the checked pages.</p></td>
+  <td class="era"><p>678 visible article records dated 1965-2026.</p><p class="caveat">The evidence includes an era qualification; review it before applying terms to an item.</p></td>
+  <td class="contact"><span class="contact-note">No curated public contact route is recorded in this evidence snapshot.</span></td>
+</tr>
+
+<tr>
+  <td class="journal"><strong class="journal-name">Queen&#x27;s Law Journal</strong><code>QUEENS-LJ</code><span class="platform">qlr</span></td>
+  <td class="evidence"><span class="tag restricted">Restricted / permission-based</span><strong class="license-name">PDFs available; no public reuse license found; site footer says All Rights Reserved</strong><span class="policy-link"><a href="https://journal.queenslaw.ca/issues" target="_blank" rel="noopener noreferrer">Queen&#x27;s Law Journal issues</a></span><p class="policy-summary">The Issues page provides current and historical PDFs, but I did not find a Creative Commons or other public reuse license on the checked home, issues, submissions, article/PDF, and contact pages. The site footer states All Rights Reserved.</p><details><summary>Supporting sources (2)</summary><ul class="source-list"><li><a href="https://journal.queenslaw.ca/" target="_blank" rel="noopener noreferrer">Supporting source 1: journal.queenslaw.ca</a></li><li><a href="https://journal.queenslaw.ca/submissions" target="_blank" rel="noopener noreferrer">Supporting source 2: journal.queenslaw.ca</a></li></ul></details></td>
+  <td class="era"><p>192 visible article records dated 2011-2026.</p><p class="caveat">The evidence includes an era qualification; review it before applying terms to an item.</p></td>
+  <td class="contact"><a href="https://journal.queenslaw.ca/contact-us#:~:text=qlj%40queensu.ca" target="_blank" rel="noopener noreferrer">Queen&#x27;s Law Journal contact</a><ul class="email-list"><li><a href="mailto:qlj@queensu.ca">qlj@queensu.ca</a></li><li><a href="mailto:QLJadmin@queensu.ca">QLJadmin@queensu.ca</a></li></ul></td>
+</tr>
+
+<tr>
+  <td class="journal"><strong class="journal-name">Supreme Court Law Review</strong><code>SCLR</code><span class="platform">Digital Commons</span></td>
+  <td class="evidence"><span class="tag contact-only">Contact only</span><strong class="license-name">No public licensing result recorded</strong><p class="policy-summary">The curated evidence records a public contact route but no public licensing or rights-policy result. No conclusion is drawn about whether a license or policy exists.</p></td>
+  <td class="era"><p>440 visible article records dated 2001-2024.</p><p class="caveat">No licensing conclusion is drawn from the absence of a curated policy result.</p></td>
+  <td class="contact"><a href="https://digitalcommons.osgoode.yorku.ca/sclr/editorialboard.html#:~:text=Sonia%20Lawrence" target="_blank" rel="noopener noreferrer">SCLR editorial board</a><span class="contact-note">No public email is recorded in this evidence snapshot.</span></td>
+</tr>
+
+<tr>
+  <td class="journal"><strong class="journal-name">Transnational Human Rights Review</strong><code>TRANSNATL-HUM-RTS-REV</code><span class="platform">Digital Commons</span></td>
+  <td class="evidence"><span class="tag unknown">Access stated; reuse unconfirmed</span><strong class="license-name">Repository PDFs available; no CC/public reuse license found</strong><span class="policy-link"><a href="https://digitalcommons.osgoode.yorku.ca/thr/about.html" target="_blank" rel="noopener noreferrer">Transnational Human Rights Review about page</a></span><p class="policy-summary">The about page describes THR as an annual peer-reviewed journal published collaboratively by NIALS and the Nathanson Centre. Digital Commons exposes PDFs. The checked about page and representative article pages did not show a Creative Commons or public reuse license block.</p><details><summary>Supporting sources (2)</summary><ul class="source-list"><li><a href="https://digitalcommons.osgoode.yorku.ca/thr/" target="_blank" rel="noopener noreferrer">Supporting source 1: digitalcommons.osgoode.yorku.ca</a></li><li><a href="https://digitalcommons.osgoode.yorku.ca/thr/vol11/iss1/2" target="_blank" rel="noopener noreferrer">Supporting source 2: digitalcommons.osgoode.yorku.ca</a></li></ul></details></td>
+  <td class="era"><p>57 visible article records dated 2014-2024.</p><p class="caveat">No archive-wide license coverage is inferred from this source.</p></td>
+  <td class="contact"><a href="https://digitalcommons.osgoode.yorku.ca/thr/about.html#:~:text=thr%40osgoode.yorku.ca" target="_blank" rel="noopener noreferrer">THR about/submissions contact</a><ul class="email-list"><li><a href="mailto:thr@osgoode.yorku.ca">thr@osgoode.yorku.ca</a></li><li><a href="mailto:uche.ngwaba@gmail.com">uche.ngwaba@gmail.com</a></li><li><a href="mailto:ugochukwubc@yahoo.com">ugochukwubc@yahoo.com</a></li></ul></td>
+</tr>
+
+<tr>
+  <td class="journal"><strong class="journal-name">UBC Law Review</strong><code>UBC-L-REV</code><span class="platform">ubclr</span></td>
+  <td class="evidence"><span class="tag restricted">Restricted / permission-based</span><strong class="license-name">Open access since March 2023; submissions require copyright assignment; no CC found</strong><span class="policy-link"><a href="https://www.ubclawreview.ca/submissions" target="_blank" rel="noopener noreferrer">UBC Law Review submissions</a></span><p class="policy-summary">The UBC Law Review site says the journal transitioned to open access in March 2023 and that back issues are freely accessible on CanLII and Allard Research Commons. The submissions policy says publication requires authors to assign copyright to the UBC Law Review; no Creative Commons license was found.</p><details><summary>Supporting sources (3)</summary><ul class="source-list"><li><a href="https://www.ubclawreview.ca/" target="_blank" rel="noopener noreferrer">Supporting source 1: ubclawreview.ca</a></li><li><a href="https://www.ubclawreview.ca/past-issues" target="_blank" rel="noopener noreferrer">Supporting source 2: ubclawreview.ca</a></li><li><a href="https://commons.allard.ubc.ca/ubclawreview/" target="_blank" rel="noopener noreferrer">Supporting source 3: commons.allard.ubc.ca</a></li></ul></details></td>
+  <td class="era"><p>318 visible article records dated 2011-2026.</p><p class="caveat">The evidence includes an era qualification; review it before applying terms to an item.</p></td>
+  <td class="contact"><a href="https://www.ubclawreview.ca/#:~:text=submissions%40ubclawreview.ca" target="_blank" rel="noopener noreferrer">UBC Law Review contact</a><ul class="email-list"><li><a href="mailto:submissions@ubclawreview.ca">submissions@ubclawreview.ca</a></li><li><a href="mailto:advertising@ubclawreview.ca">advertising@ubclawreview.ca</a></li><li><a href="mailto:eic@ubclawreview.ca">eic@ubclawreview.ca</a></li></ul></td>
+</tr>
+
+<tr>
+  <td class="journal"><strong class="journal-name">University of New Brunswick Law Journal</strong><code>UNB-LJ</code><span class="platform">OJS</span></td>
+  <td class="evidence"><span class="tag no-result">No curated result</span><strong class="license-name">No curated public policy result in this evidence snapshot</strong><p class="policy-summary">No licensing conclusion is drawn. This does not mean that no license or rights policy exists.</p></td>
+  <td class="era"><p>1,313 visible article records dated 1947-2025.</p><p class="caveat">No licensing conclusion is drawn from the absence of a curated policy result.</p></td>
+  <td class="contact"><span class="contact-note">No curated public contact route is recorded in this evidence snapshot.</span></td>
+</tr>
+
+<tr>
+  <td class="journal"><strong class="journal-name">University of Toronto Faculty of Law Review</strong><code>U-TORONTO-FAC-L-REV</code><span class="platform">utflr</span></td>
+  <td class="evidence"><span class="tag unknown">Access stated; reuse unconfirmed</span><strong class="license-name">PDF/archive access available; no public reuse license found; reproduction inquiries routed through contact</strong><span class="policy-link"><a href="https://www.utflr.ca/requirements" target="_blank" rel="noopener noreferrer">University of Toronto Faculty of Law Review submission requirements</a></span><p class="policy-summary">The checked about, submission requirements, editorial process, past articles, forum submissions, and contact pages did not expose a Creative Commons or article reuse license. The Forum Conveniens pages explicitly route reproduction discussions through the journal contact path.</p><details><summary>Supporting sources (4)</summary><ul class="source-list"><li><a href="https://www.utflr.ca/about" target="_blank" rel="noopener noreferrer">Supporting source 1: utflr.ca</a></li><li><a href="https://www.utflr.ca/pastarticles" target="_blank" rel="noopener noreferrer">Supporting source 2: utflr.ca</a></li><li><a href="https://www.utflr.ca/forum-submissions" target="_blank" rel="noopener noreferrer">Supporting source 3: utflr.ca</a></li><li><a href="https://www.utflr.ca/contact" target="_blank" rel="noopener noreferrer">Supporting source 4: utflr.ca</a></li></ul></details></td>
+  <td class="era"><p>197 visible article records dated 2000-2025.</p><p class="caveat">No archive-wide license coverage is inferred from this source.</p></td>
+  <td class="contact"><a href="https://www.utflr.ca/contact#:~:text=editorsinchief.lawreview%40utoronto.ca" target="_blank" rel="noopener noreferrer">UTFLR contact page</a><ul class="email-list"><li><a href="mailto:editorsinchief.lawreview@utoronto.ca">editorsinchief.lawreview@utoronto.ca</a></li><li><a href="mailto:editorialmanager.lawreview@utoronto.ca">editorialmanager.lawreview@utoronto.ca</a></li><li><a href="mailto:finances.lawreview@utoronto.ca">finances.lawreview@utoronto.ca</a></li><li><a href="mailto:subscriptions.lawreview@utoronto.ca">subscriptions.lawreview@utoronto.ca</a></li><li><a href="mailto:forumconveniens.lawreview@utoronto.ca">forumconveniens.lawreview@utoronto.ca</a></li></ul></td>
+</tr>
+
+<tr>
+  <td class="journal"><strong class="journal-name">University of Toronto Journal of Law and Equality</strong><code>U-TORONTO-J-L-EQUALITY</code><span class="platform">OJS</span></td>
+  <td class="evidence"><span class="tag contact-only">Contact only</span><strong class="license-name">No public licensing result recorded</strong><p class="policy-summary">The curated evidence records a public contact route but no public licensing or rights-policy result. No conclusion is drawn about whether a license or policy exists.</p></td>
+  <td class="era"><p>52 visible article records dated 2018-2025.</p><p class="caveat">No licensing conclusion is drawn from the absence of a curated policy result.</p></td>
+  <td class="contact"><a href="https://jle.law.utoronto.ca/#:~:text=jle.editor%40utoronto.ca" target="_blank" rel="noopener noreferrer">Journal of Law &amp; Equality home/contact</a><ul class="email-list"><li><a href="mailto:jle.editor@utoronto.ca">jle.editor@utoronto.ca</a></li></ul></td>
+</tr>
+
+<tr>
+  <td class="journal"><strong class="journal-name">Western Journal of Legal Studies</strong><code>W-J-LEG-STUD</code><span class="platform">OJS</span></td>
+  <td class="evidence"><span class="tag no-result">No curated result</span><strong class="license-name">No curated public policy result in this evidence snapshot</strong><p class="policy-summary">No licensing conclusion is drawn. This does not mean that no license or rights policy exists.</p></td>
+  <td class="era"><p>92 visible article records dated 2014-2026.</p><p class="caveat">No licensing conclusion is drawn from the absence of a curated policy result.</p></td>
+  <td class="contact"><span class="contact-note">No curated public contact route is recorded in this evidence snapshot.</span></td>
+</tr>
+
+<tr>
+  <td class="journal"><strong class="journal-name">Windsor Yearbook of Access to Justice</strong><code>WINDSOR-YB-ACCESS-JUST</code><span class="platform">OJS</span></td>
+  <td class="evidence"><span class="tag no-result">No curated result</span><strong class="license-name">No curated public policy result in this evidence snapshot</strong><p class="policy-summary">No licensing conclusion is drawn. This does not mean that no license or rights policy exists.</p></td>
+  <td class="era"><p>296 visible article records dated 2007-2024.</p><p class="caveat">No licensing conclusion is drawn from the absence of a curated policy result.</p></td>
+  <td class="contact"><span class="contact-note">No curated public contact route is recorded in this evidence snapshot.</span></td>
+</tr>
+
+<tr>
+  <td class="journal"><strong class="journal-name">Wrongful Conviction Law Review</strong><code>WRONGFUL-CONVICTION-L-REV</code><span class="platform">wclr</span></td>
+  <td class="evidence"><span class="tag no-result">No curated result</span><strong class="license-name">No curated public policy result in this evidence snapshot</strong><p class="policy-summary">No licensing conclusion is drawn. This does not mean that no license or rights policy exists.</p></td>
+  <td class="era"><p>86 visible article records dated 2020-2026.</p><p class="caveat">No licensing conclusion is drawn from the absence of a curated policy result.</p></td>
+  <td class="contact"><span class="contact-note">No curated public contact route is recorded in this evidence snapshot.</span></td>
+</tr>
+</tbody>
+      </table>
+    </div>
+  </main>
+  <footer>Generated without modifying <code>oajd/journals.db</code>. Evidence source commit: <code>2bfb3d2c5c0f</code>.</footer>
+</body>
+</html>
+
